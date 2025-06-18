@@ -72,7 +72,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
                 spriteBatch.Draw(debugBoundsAsset, new Rectangle(Bounds.Right, Bounds.Y, 1, Bounds.Height), Color.Red);
             }
 
-            foreach (GameObject child in Children.OrderByDescending(c => c.ZIndex)) {
+            foreach (GameObject child in Children.OrderBy(c => c.ZIndex)) {
                 child.Draw(spriteBatch);
             }
         }

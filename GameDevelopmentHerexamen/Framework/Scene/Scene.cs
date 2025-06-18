@@ -30,7 +30,7 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
         }
 
         public virtual void HandleInput(InputState inputState) {
-            foreach (GameObject child in Children) {
+            foreach (GameObject child in Children.OrderBy(c => c.ZIndex)) {
                 child.HandleInput(inputState);
             }
         }
