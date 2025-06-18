@@ -16,8 +16,8 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public bool IsActive { get; set; } = true;
         public bool IsVisible { get; set; } = true;
 
-        protected List<GameObject> children = [];
-        protected IGameObject parent;
+        public IGameObject Parent { get; set; }
+        public List<GameObject> Children { get; } = [];
 
         public static bool DrawDebugBounds = false;
         private static Texture2D debugBoundsAsset;
@@ -28,8 +28,8 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         }
 
         public void AddChild(GameObject child) {
-            child.parent = this;
-            children.Add(this);
+            child.Parent = this;
+            Children.Add(this);
         }
 
         public void AddChildren(List<GameObject> children) {
@@ -41,7 +41,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public virtual void Update(GameTime gameTime) {
             if (!IsActive) return;
 
-            foreach (GameObject child in children) {
+            foreach (GameObject child in Children) {
                 child.Update(gameTime);
             }
         }
@@ -49,13 +49,13 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public virtual void Draw(SpriteBatch spriteBatch) {
             if (!IsVisible) return;
 
-            foreach (GameObject child in children.OrderByDescending(c => c.ZIndex)) {
+            foreach (GameObject child in Children.OrderByDescending(c => c.ZIndex)) {
                 child.Draw(spriteBatch);
             }
         }
 
         public virtual void HandleInput(InputState inputState) {
-            foreach (GameObject child in children) {
+            foreach (GameObject child in Children) {
                 child.HandleInput(inputState);
             }
         }
