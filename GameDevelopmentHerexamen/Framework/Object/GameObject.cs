@@ -1,4 +1,5 @@
-﻿using GameDevelopmentHerexamen.Framework.Utility;
+﻿using GameDevelopmentHerexamen.Framework.Scene;
+using GameDevelopmentHerexamen.Framework.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -45,8 +46,9 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public virtual void Update(GameTime gameTime) {
             if (!IsActive) return;
 
-            Vector2 parentSize = Parent is GameObject ? (Parent as GameObject).AbsoluteSize : new Vector2();
-            // TODO: fill in graphicsdevice viewport
+            Vector2 parentSize = Parent is GameObject 
+                ? (Parent as GameObject).AbsoluteSize 
+                : new Vector2(SceneManager.Instance.GraphicsDevice.Viewport.X, SceneManager.Instance.GraphicsDevice.Viewport.Y);
             AbsoluteSize = Size.Resolve(parentSize);
             AbsolutePosition = Position.Resolve(parentSize) - Anchor * AbsoluteSize;
             Bounds = new Rectangle(
