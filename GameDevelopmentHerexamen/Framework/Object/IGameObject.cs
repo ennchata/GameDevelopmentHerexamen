@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentHerexamen.Framework.GameObject {
+namespace GameDevelopmentHerexamen.Framework.Object {
     public interface IGameObject {
         public void Update(GameTime gameTime);
         public void Draw(SpriteBatch spriteBatch);

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameDevelopmentHerexamen.Framework.GameObject {
+namespace GameDevelopmentHerexamen.Framework.Object {
     public abstract class GameObject : IGameObject {
         public UDim2 Position { get; set; }
         public UDim2 Size { get; set; }
