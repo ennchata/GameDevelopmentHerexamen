@@ -24,13 +24,13 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) {
-            foreach (GameObject child in Children) {
+            foreach (GameObject child in Children.OrderBy(c => c.ZIndex)) {
                 child.Draw(spriteBatch);
             }
         }
 
         public virtual void HandleInput(InputState inputState) {
-            foreach (GameObject child in Children.OrderBy(c => c.ZIndex)) {
+            foreach (GameObject child in Children) {
                 child.HandleInput(inputState);
             }
         }
