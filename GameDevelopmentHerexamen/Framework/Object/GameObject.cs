@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Object {
-    public abstract class GameObject : IGameObject {
+    public class GameObject : IGameObject {
         public UDim2 Position { get; set; }
         public UDim2 Size { get; set; }
         public Vector2 Anchor { get; set; } = Vector2.Zero;
@@ -28,6 +28,11 @@ namespace GameDevelopmentHerexamen.Framework.Object {
 
         public static bool DrawDebugBounds = false;
 
+        public GameObject() { }
+        public GameObject(List<GameObject> children) {
+            AddChildren(children);
+        }
+
         public void AddChild(GameObject child) {
             child.Parent = this;
             Children.Add(this);
@@ -44,7 +49,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
 
             Vector2 parentSize = Parent is GameObject 
                 ? (Parent as GameObject).AbsoluteSize 
-                : new Vector2(SceneManager.Instance.GraphicsDevice.Viewport.X, SceneManager.Instance.GraphicsDevice.Viewport.Y);
+                : new Vector2(SceneManager.Instance.GraphicsDevice.Viewport.Width, SceneManager.Instance.GraphicsDevice.Viewport.Height);
             AbsoluteSize = Size.Resolve(parentSize);
             AbsolutePosition = Position.Resolve(parentSize) - Anchor * AbsoluteSize;
             Bounds = new Rectangle(

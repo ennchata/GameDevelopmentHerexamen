@@ -9,8 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Scene {
-    public abstract class GameScene : IGameObject {
+    public class GameScene : IGameObject {
         public List<GameObject> Children { get; } = [];
+
+        public GameScene() { }
+        public GameScene(List<GameObject> children) {
+            AddChildren(children);
+        }
 
         public void AddChild(GameObject child) {
             child.Parent = this;
