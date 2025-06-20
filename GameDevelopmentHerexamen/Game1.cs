@@ -1,6 +1,8 @@
 ﻿using GameDevelopmentHerexamen.Framework.Object;
 using GameDevelopmentHerexamen.Framework.Scene;
+using GameDevelopmentHerexamen.Framework.Utility;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -16,8 +18,12 @@ namespace GameDevelopmentHerexamen {
         }
 
         protected override void Initialize() {
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+
             GameObject.InitializeDebug(_graphics.GraphicsDevice);
             SceneManager.Instance.GraphicsDevice = _graphics.GraphicsDevice;
+            AssetManager.Instance.Initialize(Content);
 
             base.Initialize();
         }
