@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Scene {
-    public abstract class Scene : IGameObject {
+    public abstract class GameScene : IGameObject {
         public List<GameObject> Children { get; } = [];
 
         public void AddChild(GameObject child) {
