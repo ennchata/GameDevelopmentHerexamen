@@ -15,7 +15,7 @@ namespace GameDevelopmentHerexamen.Framework.Utility {
             Y = y;
         }
 
-        public UDim2(float xScale, float xOffset, float yScale, float yOffset) {
+        public UDim2(float xScale, int xOffset, float yScale, int yOffset) {
             X = new UDim(xScale, xOffset);
             Y = new UDim(yScale, yOffset);
         }

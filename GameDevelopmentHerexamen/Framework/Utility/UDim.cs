@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Utility {
-    public class UDim(float scale, float offset) {
+    public class UDim(float scale, int offset) {
         public float Scale = scale;
-        public float Offset = offset;
+        public int Offset = offset;
 
         public float Resolve(float parentSize) {
             return parentSize * Scale + Offset;
         }
+
+        public static UDim Zero { get; } = new UDim(0, 0);
+        public static UDim Half { get; } = new UDim(0.5f, 0);
+        public static UDim One { get; } = new UDim(1f, 0);
     }
 }
