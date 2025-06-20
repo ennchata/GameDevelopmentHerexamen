@@ -44,6 +44,14 @@ namespace GameDevelopmentHerexamen.Framework.Object {
             }
         }
 
+        public void AddComponent(IComponent component) {
+            Components.Add(component);
+        }
+
+        public void AddComponents(List<IComponent> components) {
+            Components.AddRange(components);
+        }
+
         public virtual void Update(GameTime gameTime) {
             if (!IsActive) return;
 

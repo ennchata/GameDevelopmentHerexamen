@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Utility {
-    public class UDim2 {
+    public struct UDim2 {
         public UDim X;
         public UDim Y;
 
@@ -20,7 +20,7 @@ namespace GameDevelopmentHerexamen.Framework.Utility {
             Y = new UDim(yScale, yOffset);
         }
 
-        public Vector2 Resolve(Vector2 parentSize) {
+        public readonly Vector2 Resolve(Vector2 parentSize) {
             return new Vector2(X.Resolve(parentSize.X), Y.Resolve(parentSize.Y));
         }
 
