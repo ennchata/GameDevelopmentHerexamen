@@ -12,12 +12,12 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
     public abstract class Scene : IGameObject {
         public List<GameObject> Children { get; } = [];
 
-        public virtual void AddChild(GameObject child) {
+        public void AddChild(GameObject child) {
             child.Parent = this;
             Children.Add(child);
         }
 
-        public virtual void AddChildren(List<GameObject> children) {
+        public void AddChildren(List<GameObject> children) {
             foreach (GameObject child in children) {
                 AddChild(child);
             }
