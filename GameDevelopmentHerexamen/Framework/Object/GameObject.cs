@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Object {
     public class GameObject : IGameObject {
-        public UDim2 Position { get; set; }
-        public UDim2 Size { get; set; }
+        public UDim2 Position { get; set; } = new UDim2(0, 0, 0, 0);
+        public UDim2 Size { get; set; } = new UDim2(1, 0, 1, 0);
         public Vector2 Anchor { get; set; } = Vector2.Zero;
         public int ZIndex { get; set; } = 0;
         public bool IsActive { get; set; } = true;
