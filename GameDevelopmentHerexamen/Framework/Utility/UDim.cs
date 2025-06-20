@@ -16,5 +16,8 @@ namespace GameDevelopmentHerexamen.Framework.Utility {
         public static UDim Zero { get; } = new UDim(0, 0);
         public static UDim Half { get; } = new UDim(0.5f, 0);
         public static UDim One { get; } = new UDim(1f, 0);
+
+        public static UDim operator +(UDim uDim, int offset) => new UDim(uDim.Scale, uDim.Offset + offset);
+        public static UDim operator -(UDim uDim, int offset) => new UDim(uDim.Scale, uDim.Offset - offset);
     }
 }
