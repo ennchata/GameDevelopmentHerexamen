@@ -25,12 +25,6 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public Rectangle Bounds { get; private set; }
 
         public static bool DrawDebugBounds = false;
-        private static Texture2D debugBoundsAsset;
-
-        public static void InitializeDebug(GraphicsDevice graphicsDevice) {
-            debugBoundsAsset = new Texture2D(graphicsDevice, 1, 1);
-            debugBoundsAsset.SetData([Color.White]);
-        }
 
         public void AddChild(GameObject child) {
             child.Parent = this;
@@ -64,12 +58,12 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public virtual void Draw(SpriteBatch spriteBatch) {
             if (!IsVisible) return;
 
-            if (DrawDebugBounds && debugBoundsAsset != null) {
-                spriteBatch.Draw(debugBoundsAsset, Bounds, new Color(Color.White, 0.2f));
-                spriteBatch.Draw(debugBoundsAsset, new Rectangle(Bounds.X, Bounds.Y, Bounds.Width, 1), Color.Red);
-                spriteBatch.Draw(debugBoundsAsset, new Rectangle(Bounds.X, Bounds.Bottom, Bounds.Width, 1), Color.Red);
-                spriteBatch.Draw(debugBoundsAsset, new Rectangle(Bounds.X, Bounds.Y, 1, Bounds.Height), Color.Red);
-                spriteBatch.Draw(debugBoundsAsset, new Rectangle(Bounds.Right, Bounds.Y, 1, Bounds.Height), Color.Red);
+            if (DrawDebugBounds && AssetManager.BlankTexture != null) {
+                spriteBatch.Draw(AssetManager.BlankTexture, Bounds, new Color(Color.White, 0.2f));
+                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.X, Bounds.Y, Bounds.Width, 1), Color.Red);
+                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.X, Bounds.Bottom, Bounds.Width, 1), Color.Red);
+                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.X, Bounds.Y, 1, Bounds.Height), Color.Red);
+                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.Right, Bounds.Y, 1, Bounds.Height), Color.Red);
             }
 
             foreach (GameObject child in Children.OrderBy(c => c.ZIndex)) {

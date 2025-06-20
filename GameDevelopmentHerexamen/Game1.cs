@@ -21,7 +21,6 @@ namespace GameDevelopmentHerexamen {
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
 
-            GameObject.InitializeDebug(_graphics.GraphicsDevice);
             SceneManager.Instance.GraphicsDevice = _graphics.GraphicsDevice;
             AssetManager.Instance.Initialize(Content);
 
