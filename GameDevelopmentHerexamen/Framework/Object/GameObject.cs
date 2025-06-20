@@ -1,4 +1,5 @@
-﻿using GameDevelopmentHerexamen.Framework.Scene;
+﻿using GameDevelopmentHerexamen.Framework.Object.Component;
+using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         public bool IsActive { get; set; } = true;
         public bool IsVisible { get; set; } = true;
 
+        public List<IComponent> Components { get; set; } = [];
         public IGameObject Parent { get; set; }
         public List<GameObject> Children { get; } = [];
 
@@ -50,6 +52,10 @@ namespace GameDevelopmentHerexamen.Framework.Object {
                 (int)AbsoluteSize.X, (int)AbsoluteSize.Y
             );
 
+            foreach (IComponent component in Components) {
+                component.Update(this, gameTime);
+            }
+
             foreach (GameObject child in Children) {
                 child.Update(gameTime);
             }
@@ -66,12 +72,20 @@ namespace GameDevelopmentHerexamen.Framework.Object {
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.Right, Bounds.Y, 1, Bounds.Height), Color.Red);
             }
 
+            foreach (IComponent component in Components) {
+                component.Draw(this, spriteBatch);
+            }
+
             foreach (GameObject child in Children.OrderBy(c => c.ZIndex)) {
                 child.Draw(spriteBatch);
             }
         }
 
         public virtual void HandleInput(InputState inputState) {
+            foreach (IComponent component in Components) {
+                component.HandleInput(this, inputState);
+            }
+
             foreach (GameObject child in Children) {
                 child.HandleInput(inputState);
             }
