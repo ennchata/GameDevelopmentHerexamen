@@ -78,7 +78,6 @@ namespace GameDevelopmentHerexamen.Framework.Object {
             if (!IsVisible) return;
 
             if (DrawDebugBounds && AssetManager.BlankTexture != null) {
-                spriteBatch.Draw(AssetManager.BlankTexture, Bounds, new Color(Color.White, 0.2f));
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.X, Bounds.Y, Bounds.Width, 1), Color.Red);
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.X, Bounds.Bottom, Bounds.Width, 1), Color.Red);
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.X, Bounds.Y, 1, Bounds.Height), Color.Red);

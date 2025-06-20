@@ -33,7 +33,6 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
                         (int)textSize.X, (int)textSize.Y
                     );
 
-                    spriteBatch.Draw(AssetManager.BlankTexture, TextBounds, new Color(Color.White, 0.2f));
                     spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(TextBounds.X, TextBounds.Y, TextBounds.Width, 1), Color.Red);
                     spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(TextBounds.X, TextBounds.Bottom, TextBounds.Width, 1), Color.Red);
                     spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(TextBounds.X, TextBounds.Y, 1, TextBounds.Height), Color.Red);
