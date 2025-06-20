@@ -35,7 +35,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
 
         public void AddChild(GameObject child) {
             child.Parent = this;
-            Children.Add(this);
+            Children.Add(child);
         }
 
         public void AddChildren(List<GameObject> children) {
