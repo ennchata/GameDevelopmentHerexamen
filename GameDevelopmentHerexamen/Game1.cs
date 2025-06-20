@@ -1,6 +1,7 @@
 ﻿using GameDevelopmentHerexamen.Framework.Object;
 using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
+using GameDevelopmentHerexamen.Implementation.Scene.Menu;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +24,7 @@ namespace GameDevelopmentHerexamen {
 
             SceneManager.Instance.GraphicsDevice = _graphics.GraphicsDevice;
             AssetManager.Instance.Initialize(Content);
+            SceneManager.Instance.ChangeScene(new SplashScreenScene());
 
             base.Initialize();
         }
