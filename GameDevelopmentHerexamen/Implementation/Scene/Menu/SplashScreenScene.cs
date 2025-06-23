@@ -5,6 +5,7 @@ using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
 using GameDevelopmentHerexamen.Implementation.Object.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,10 +15,20 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
     public class SplashScreenScene : GameScene {
-        public static float BackgroundHue = 0f;
-
         public SplashScreenScene() : base([
-            new TextObject("fonts/roboto24", "My First Platformer", textAnchor: new Vector2(0.5f, 1f), textPosition: UDim2.CenterCenter - (0, 5))
+            new GameObject() {
+                Components = [
+                    new InputComponent((self, inputState) => {
+                        if (inputState.IsKeyDown(Keys.Escape)) {
+                            Game1.ShouldExit();
+                        }
+                    })
+                ]
+            },
+            new TextObject("fonts/roboto36", "My First Platformer", textPosition: new UDim2(0.5f, 0, 0.25f, 0)),
+            new TextObject("fonts/roboto14", "Game Development Herexamen - Thibo Maes", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -35)),
+            new TextObject("fonts/roboto14", "Press [Esc] to close game", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -10))
+        
         ]) { }
     }
 }

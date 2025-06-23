@@ -12,6 +12,11 @@ namespace GameDevelopmentHerexamen {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private static bool shouldExit = false;
+        public static void ShouldExit() {
+            shouldExit = true;
+        }
+
         public Game1() {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -35,6 +40,11 @@ namespace GameDevelopmentHerexamen {
         }
 
         protected override void Update(GameTime gameTime) {
+            if (shouldExit == true) {
+                Exit();
+                return;
+            }
+
             SceneManager.Instance.Update(gameTime);
 
             base.Update(gameTime);
