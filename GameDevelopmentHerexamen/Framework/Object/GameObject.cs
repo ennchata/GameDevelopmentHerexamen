@@ -75,7 +75,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
                 (int)AbsoluteSize.X, (int)AbsoluteSize.Y
             );
 
-            foreach (IComponent component in Components) {
+            foreach (IComponent component in Components.OrderBy(c => c.Order)) {
                 component.Update(this, gameTime);
             }
 
@@ -94,7 +94,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(Bounds.Right, Bounds.Y, 1, Bounds.Height), Color.Red);
             }
 
-            foreach (IComponent component in Components) {
+            foreach (IComponent component in Components.OrderBy(c => c.Order)) {
                 component.Draw(this, spriteBatch);
             }
 
@@ -104,7 +104,7 @@ namespace GameDevelopmentHerexamen.Framework.Object {
         }
 
         public virtual void HandleInput(InputState inputState) {
-            foreach (IComponent component in Components) {
+            foreach (IComponent component in Components.OrderBy(c => c.Order)) {
                 component.HandleInput(this, inputState);
             }
 

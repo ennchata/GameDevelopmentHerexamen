@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Framework.Object.Component {
     public interface IComponent {
+        public int Order { get; set; }
+
         public void Update(GameObject owner, GameTime gameTime) { }
         public void Draw(GameObject owner, SpriteBatch spriteBatch) { }
         public void HandleInput(GameObject owner, InputState inputState) { }
