@@ -11,7 +11,7 @@ namespace GameDevelopmentHerexamen.Framework.Object.Component {
 
         public int Order { get; set; } = 0;
 
-        public void Draw(GameObject owner, InputState inputState) {
+        public void HandleInput(GameObject owner, InputState inputState) {
             action.Invoke(owner, inputState);
         }
     }
