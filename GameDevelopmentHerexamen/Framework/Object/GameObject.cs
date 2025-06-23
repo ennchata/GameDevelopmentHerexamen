@@ -52,6 +52,16 @@ namespace GameDevelopmentHerexamen.Framework.Object {
             Components.AddRange(components);
         }
 
+        public T GetComponent<T>() where T : IComponent {
+            IEnumerable<T> components = Components.OfType<T>();
+            
+            if (components.Count() == 1) {
+                return components.First();
+            }
+
+            return default;
+        }
+
         public virtual void Update(GameTime gameTime) {
             if (!IsActive) return;
 
