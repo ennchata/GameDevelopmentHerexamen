@@ -45,8 +45,8 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(10, 0, 1, GraphicsDevice.Viewport.Height), Color.Blue);
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(GraphicsDevice.Viewport.Width - 10, 0, 1, GraphicsDevice.Viewport.Height), Color.Blue);
                 
-                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(0, GraphicsDevice.Viewport.Height / 2, GraphicsDevice.Viewport.Width, 1), Color.Black);
-                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(GraphicsDevice.Viewport.Width / 2, 0, 1, GraphicsDevice.Viewport.Height), Color.Black);
+                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(0, GraphicsDevice.Viewport.Height / 2, GraphicsDevice.Viewport.Width, 1), Color.Gray);
+                spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(GraphicsDevice.Viewport.Width / 2, 0, 1, GraphicsDevice.Viewport.Height), Color.Gray);
             }
         }
     }

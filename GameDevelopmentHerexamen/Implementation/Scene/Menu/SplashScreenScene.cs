@@ -3,6 +3,7 @@ using GameDevelopmentHerexamen.Framework.Object.Component;
 using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
+using GameDevelopmentHerexamen.Implementation.Object.UI;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
         public static float BackgroundHue = 0f;
 
         public SplashScreenScene() : base([
-
+            new TextObject("fonts/roboto24", "My First Platformer", textAnchor: new Vector2(0.5f, 1f), textPosition: UDim2.CenterCenter - (0, 5))
         ]) { }
     }
 }
