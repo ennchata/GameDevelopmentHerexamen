@@ -52,14 +52,14 @@ namespace GameDevelopmentHerexamen.Framework.Object {
             Components.AddRange(components);
         }
 
-        public T GetComponent<T>() where T : IComponent {
-            IEnumerable<T> components = Components.OfType<T>();
+        public T GetComponent<T>() where T : class, IComponent {
+            List<T> components = Components.OfType<T>().ToList();
             
-            if (components.Count() == 1) {
+            if (components.Count == 1) {
                 return components.First();
             }
 
-            return default;
+            return null;
         }
 
         public virtual void Update(GameTime gameTime) {
