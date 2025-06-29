@@ -1,4 +1,5 @@
 ﻿using GameDevelopmentHerexamen.Framework.Object;
+using GameDevelopmentHerexamen.Framework.Object.Component;
 using GameDevelopmentHerexamen.Framework.Utility;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,6 +28,7 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
         public void Update(GameTime gameTime) {
             InputState.Update();
             CurrentScene?.HandleInput(InputState);
+            ColliderComponent.CollectColliders();
             CurrentScene?.Update(gameTime);
 
             if (InputState.IsKeyDown(Keys.F1)) {
