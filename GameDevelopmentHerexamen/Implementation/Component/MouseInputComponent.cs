@@ -20,25 +20,23 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
                 Action<bool, bool> anyHandler = null,
                 Action<bool> hoverHandler = null,
                 Action clickHandler = null) {
-            if (anyHandler != null) {
-                InputEvent += anyHandler.Invoke;
-            }
+            InputEvent += (isClicked, isHovering) => {
+                anyHandler?.Invoke(isClicked, isHovering);
+            };
 
-            if (hoverHandler != null) {
-                InputEvent += (_, isHovering) => {
-                    if (previousState.isHovering != isHovering) {
-                        hoverHandler.Invoke(isHovering);
-                    }
-                };
-            }
 
-            if (clickHandler != null) {
-                InputEvent += (isClicked, isHovering) => {
-                    if (previousState.isClicked && !isClicked && isHovering) {
-                        clickHandler.Invoke();
-                    }
-                };
-            }
+            InputEvent += (_, isHovering) => {
+                if (previousState.isHovering != isHovering) {
+                    hoverHandler?.Invoke(isHovering);
+                }
+            };
+
+
+            InputEvent += (isClicked, isHovering) => {
+                if (previousState.isClicked && !isClicked && isHovering) {
+                    clickHandler?.Invoke();
+                }
+            };
         }
 
         public void HandleInput(GameObject owner, InputState inputState) {

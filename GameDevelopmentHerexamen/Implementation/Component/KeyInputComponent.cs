@@ -23,25 +23,21 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
                 Action keyUpHandler = null) {
             Key = key;
 
-            if (anyHandler != null) {
-                InputEvent += anyHandler.Invoke;
-            }
+            InputEvent += (isDown) => {
+                anyHandler?.Invoke(isDown);
+            };
 
-            if (keyDownHandler != null) {
-                InputEvent += (isDown) => {
-                    if (isDown) {
-                        keyDownHandler.Invoke();
-                    }
-                };
-            }
+            InputEvent += (isDown) => {
+                if (isDown) {
+                    keyDownHandler?.Invoke();
+                }
+            };
 
-            if (keyUpHandler != null) {
-                InputEvent += (isDown) => {
-                    if (!isDown) {
-                        keyUpHandler.Invoke();
-                    }
-                };
-            }
+            InputEvent += (isDown) => {
+                if (!isDown) {
+                    keyUpHandler?.Invoke();
+                }
+            };
         }
 
         public void HandleInput(GameObject owner, InputState inputState) {
