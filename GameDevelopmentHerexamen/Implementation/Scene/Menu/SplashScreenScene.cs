@@ -19,6 +19,9 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
             new GameObject() {
                 Components = [ new KeyInputComponent(Keys.Escape, keyDownHandler: Game1.ShouldExit) ]
             },
+            new GameObject() {
+                Components = [ new RainbowBackgroundComponent() ]
+            },
             new TextObject("fonts/roboto36", "My First Platformer", textPosition: new UDim2(0.5f, 0, 0.25f, 0)),
             new TextObject("fonts/roboto14", "Game Development Herexamen - Thibo Maes", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -35)),
             new TextObject("fonts/roboto14", "Press [Esc] to close game", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -10)),
