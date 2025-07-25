@@ -25,6 +25,21 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
             new TextObject("fonts/roboto36", "My First Platformer", textPosition: new UDim2(0.5f, 0, 0.25f, 0)),
             new TextObject("fonts/roboto14", "Game Development Herexamen - Thibo Maes", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -35)),
             new TextObject("fonts/roboto14", "Press [Esc] to close game", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -10)),
+            new TextButton(
+                new TextComponent() {
+                    FontReference = "fonts/roboto14",
+                    Text = "Button",
+                    TextColor = Color.Black
+                },
+                () => {
+                    Debug.WriteLine("Button Click");
+                },
+                Color.WhiteSmoke
+            ) {
+                Size = new UDim2(0.25f, 0, 0.1f, 0),
+                Position = UDim2.CenterCenter,
+                Anchor = Vector2.One / 2f
+            }
         ]) { }
     }
 }
