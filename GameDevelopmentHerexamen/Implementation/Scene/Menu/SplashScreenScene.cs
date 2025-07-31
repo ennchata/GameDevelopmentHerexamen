@@ -33,7 +33,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
                     TextColor = Color.Black
                 },
                 () => {
-                    SceneManager.Instance.ChangeScene(new LevelSelectionScene());
+                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new LevelSelectionScene()));
                 },
                 Color.WhiteSmoke
             ) {

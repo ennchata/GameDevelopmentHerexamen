@@ -16,7 +16,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
         public LevelSelectionScene() : base([
             new GameObject() {
                 Components = [ new KeyInputComponent(Keys.Escape, keyUpHandler: () => {
-                    SceneManager.Instance.ChangeScene(new SplashScreenScene());
+                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new SplashScreenScene()));
                 }) ]
             },
             new GameObject() {

@@ -18,6 +18,8 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
         public GraphicsDevice GraphicsDevice { get; set; }
         public InputState InputState { get; } = new InputState();
 
+        private ISceneTransitioner sceneTransitioner = null;
+
         private SceneManager() { }
 
         public void ChangeScene(GameScene newScene) {
@@ -25,11 +27,20 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
             CurrentScene = newScene;
         }
 
+        public void TransitionScene(ISceneTransitioner sceneTransitioner) {
+            this.sceneTransitioner = sceneTransitioner;
+        }
+
         public void Update(GameTime gameTime) {
             InputState.Update();
             CurrentScene?.HandleInput(InputState);
             ColliderComponent.CollectColliders();
+            sceneTransitioner?.Update(gameTime);
             CurrentScene?.Update(gameTime);
+
+            if (sceneTransitioner?.IsTransitioning == false) {
+                sceneTransitioner = null;
+            }
 
             if (InputState.IsKeyDown(Keys.F1)) {
                 GameObject.DrawDebugBounds = true;
@@ -40,6 +51,7 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
 
         public void Draw(SpriteBatch spriteBatch) {
             CurrentScene?.Draw(spriteBatch);
+            sceneTransitioner?.Draw(spriteBatch);
 
             if (GameObject.DrawDebugBounds) {
                 spriteBatch.Draw(AssetManager.BlankTexture, new Rectangle(0, 10, GraphicsDevice.Viewport.Width, 1), Color.Blue);
