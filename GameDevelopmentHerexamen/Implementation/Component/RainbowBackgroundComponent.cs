@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 namespace GameDevelopmentHerexamen.Implementation.Component {
     public class RainbowBackgroundComponent : IComponent {
         public int Order { get; set; } = 0;
-        public float Hue { get => hue; set { hue = value % 360; } }
+        public static float Hue { get => hue; set { hue = value % 360; } }
         public float Velocity { get; set; } = 15; 
 
-        private float hue;
+        private static float hue;
 
         public void Update(GameObject owner, GameTime gameTime) {
             Hue += Velocity * gameTime.ElapsedGameTime.Milliseconds / 1000;
@@ -26,7 +26,7 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
             spriteBatch.Draw(AssetManager.BlankTexture, owner.Bounds, HsvToColor(Hue, 1, 0.33f));
         }
 
-        private Color HsvToColor(float h, float s, float v) {
+        private static Color HsvToColor(float h, float s, float v) {
             float r = 0, g = 0, b = 0;
 
             if (s == 0) {

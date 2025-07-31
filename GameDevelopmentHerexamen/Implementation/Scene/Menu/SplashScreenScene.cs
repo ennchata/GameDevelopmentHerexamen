@@ -17,22 +17,23 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
     public class SplashScreenScene : GameScene {
         public SplashScreenScene() : base([
             new GameObject() {
-                Components = [ new KeyInputComponent(Keys.Escape, keyDownHandler: Game1.ShouldExit) ]
+                Components = [ new KeyInputComponent(Keys.Escape, keyUpHandler: Game1.ShouldExit) ]
             },
             new GameObject() {
-                Components = [ new RainbowBackgroundComponent() ]
+                Components = [ new RainbowBackgroundComponent() ],
+                ZIndex = -100
             },
             new TextObject("fonts/roboto36", "My First Platformer", textPosition: new UDim2(0.5f, 0, 0.25f, 0)),
             new TextObject("fonts/roboto14", "Game Development Herexamen - Thibo Maes", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -35)),
-            new TextObject("fonts/roboto14", "Press [Esc] to close game", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -10)),
+            new TextObject("fonts/roboto14", "[Esc] - Close game", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -10)),
             new TextButton(
                 new TextComponent() {
                     FontReference = "fonts/roboto14",
-                    Text = "Button",
+                    Text = "Play",
                     TextColor = Color.Black
                 },
                 () => {
-                    Debug.WriteLine("Button Click");
+                    SceneManager.Instance.ChangeScene(new LevelSelectionScene());
                 },
                 Color.WhiteSmoke
             ) {
