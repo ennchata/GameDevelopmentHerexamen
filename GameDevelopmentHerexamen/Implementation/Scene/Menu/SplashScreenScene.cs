@@ -4,6 +4,7 @@ using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
 using GameDevelopmentHerexamen.Implementation.Object.UI;
+using GameDevelopmentHerexamen.Implementation.Scene.Transition;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -33,7 +34,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
                     TextColor = Color.Black
                 },
                 () => {
-                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new LevelSelectionScene()));
+                    SceneManager.Instance.TransitionScene(new BlackFadeScreenTransitioner(new LevelSelectionScene()));
                 },
                 Color.WhiteSmoke
             ) {

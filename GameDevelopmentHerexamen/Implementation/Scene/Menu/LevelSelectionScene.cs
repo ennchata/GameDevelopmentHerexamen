@@ -3,6 +3,7 @@ using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
 using GameDevelopmentHerexamen.Implementation.Object.UI;
+using GameDevelopmentHerexamen.Implementation.Scene.Transition;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -16,7 +17,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
         public LevelSelectionScene() : base([
             new GameObject() {
                 Components = [ new KeyInputComponent(Keys.Escape, keyUpHandler: () => {
-                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new SplashScreenScene()));
+                    SceneManager.Instance.TransitionScene(new BlackFadeScreenTransitioner(new SplashScreenScene()));
                 }) ]
             },
             new GameObject() {
