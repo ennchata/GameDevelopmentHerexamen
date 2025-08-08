@@ -26,6 +26,51 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
             },
             new TextObject("fonts/roboto36", "Select Level", textPosition: new UDim2(0.5f, 0, 1f/8f, 0)),
             new TextObject("fonts/roboto14", "[Esc] - Return to main menu", textAnchor: new Vector2(0f, 1f), textPosition: UDim2.BottomLeft + (10, -10)),
+            new TextButton(
+                new TextComponent() {
+                    FontReference = "fonts/roboto14",
+                    Text = "Easy",
+                    TextColor = Color.Black
+                },
+                () => {
+                    
+                },
+                Color.LightGreen
+            ) {
+                Size = new UDim2(0.25f, 0, 0.1f, 0),
+                Position = UDim2.CenterCenter - new UDim2(0f, 0, 0.1f, 10),
+                Anchor = Vector2.One / 2f
+            },
+            new TextButton(
+                new TextComponent() {
+                    FontReference = "fonts/roboto14",
+                    Text = "Normal",
+                    TextColor = Color.Black
+                },
+                () => {
+
+                },
+                Color.PaleGoldenrod
+            ) {
+                Size = new UDim2(0.25f, 0, 0.1f, 0),
+                Position = UDim2.CenterCenter,
+                Anchor = Vector2.One / 2f
+            },
+            new TextButton(
+                new TextComponent() {
+                    FontReference = "fonts/roboto14",
+                    Text = "Hard",
+                    TextColor = Color.Black
+                },
+                () => {
+
+                },
+                Color.Salmon
+            ) {
+                Size = new UDim2(0.25f, 0, 0.1f, 0),
+                Position = UDim2.CenterCenter + new UDim2(0f, 0, 0.1f, 10),
+                Anchor = Vector2.One / 2f
+            },
         ]) { }
     }
 }
