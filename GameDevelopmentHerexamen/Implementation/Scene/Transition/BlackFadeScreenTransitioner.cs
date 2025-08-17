@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Scene.Transition {
-    public class BlackFadeScreenTransitioner(GameScene gameScene, float length = 0.33f) : ISceneTransitioner {
+    public class BlackFadeScreenTransitioner(GameScene gameScene, float length = 0.25f) : ISceneTransitioner {
         public bool IsTransitioning { get; set; } = true;
         public GameScene NewScene { get; set; } = gameScene;
 
