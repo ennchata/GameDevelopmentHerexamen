@@ -3,6 +3,7 @@ using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
 using GameDevelopmentHerexamen.Implementation.Object.UI;
+using GameDevelopmentHerexamen.Implementation.Scene.Gameplay;
 using GameDevelopmentHerexamen.Implementation.Scene.Transition;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -33,7 +34,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
                     TextColor = Color.Black
                 },
                 () => {
-                    
+                    SceneManager.Instance.TransitionScene(new BlackFadeScreenTransitioner(new SingleplayerScene()));
                 },
                 Color.LightGreen
             ) {
@@ -70,7 +71,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
                 Size = new UDim2(0.25f, 0, 0.1f, 0),
                 Position = UDim2.CenterCenter + new UDim2(0f, 0, 0.1f, 10),
                 Anchor = Vector2.One / 2f
-            },
+            }
         ]) { }
     }
 }

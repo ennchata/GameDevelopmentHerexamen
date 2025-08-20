@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SharpDX.MediaFoundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,8 @@ namespace GameDevelopmentHerexamen.Framework.Utility {
 
         public static UDim2 operator +(UDim2 uDim2, (int x, int y) offset) => new UDim2(uDim2.X + offset.x, uDim2.Y + offset.y);
         public static UDim2 operator -(UDim2 uDim2, (int x, int y) offset) => new UDim2(uDim2.X - offset.x, uDim2.Y - offset.y);
+        public static UDim2 operator +(UDim2 uDim2, Vector2 vector2) => new UDim2(uDim2.X + (int)Math.Round(vector2.X), uDim2.Y + (int)Math.Round(vector2.Y));
+        public static UDim2 operator -(UDim2 uDim2, Vector2 vector2) => new UDim2(uDim2.X - (int)Math.Round(vector2.X), uDim2.Y - (int)Math.Round(vector2.Y));
         public static UDim2 operator +(UDim2 a, UDim2 b) => new UDim2(a.X + b.X, a.Y + b.Y);
         public static UDim2 operator -(UDim2 a, UDim2 b) => new UDim2(a.X - b.X, a.Y - b.Y);
     }
