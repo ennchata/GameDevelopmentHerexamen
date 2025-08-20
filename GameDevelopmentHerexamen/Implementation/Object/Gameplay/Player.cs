@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
     public class Player : GameObject {
+        public int JumpPower { get; set; } = 750;
+
+        private bool shouldJump = false;
+
         public Player(UDim2 initialPosition) {
             Position = initialPosition;
             Size = new UDim2(0, 16, 0, 32);
@@ -29,12 +33,20 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
                 ],
                 CurrentRectangle = 0
             });
-
-            AddComponent(new KeyInputComponent(Keys.W, keyDownHandler: () => { Move(Vector2.One * 10); }));
+            AddComponent(new PhysicsComponent());
+            AddComponent(new KeyInputComponent(Keys.Z, keyDownHandler: () => {
+                shouldJump = true;
+            }));
         }
 
-        public void Move(Vector2 offset) {
-            Position += offset;
+        public override void Update(GameTime gameTime) {
+            PhysicsComponent physicsComponent = GetComponent<PhysicsComponent>();
+            if (shouldJump) {
+                shouldJump = false;
+                physicsComponent.Velocity = new Vector2(physicsComponent.Velocity.X, -JumpPower);
+            }
+            
+            base.Update(gameTime);
         }
     }
 }
