@@ -14,12 +14,13 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
     public class Player : GameObject {
-        public int JumpPower { get; set; } = 750;
+        public int JumpPower { get; set; } = 825;
         public int WalkSpeed { get; set; } = 450;
 
         private bool shouldJump = false;
         private bool onGround = false;
         private (bool left, bool right) shouldMove = (false, false);
+        private float animationTimer = 0;
 
         public Player(UDim2 initialPosition) {
             Vector2 rawInitialPosition = initialPosition.Resolve(new Vector2(SceneManager.Instance.GraphicsDevice.Viewport.Width, SceneManager.Instance.GraphicsDevice.Viewport.Height));
@@ -59,6 +60,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
                         if (physicsComponent.Velocity.Y >= 0) {
                             physicsComponent.GravityAffected = false;
                             physicsComponent.Velocity = new Vector2(physicsComponent.Velocity.X, 0);
+                            Position = new UDim2(Position.X, new UDim(Position.Y.Scale, other.Bounds.Top - (int)AbsoluteSize.Y + 1));
                             onGround = true;
                         }
                     }
@@ -74,6 +76,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
         }
 
         public override void Update(GameTime gameTime) {
+            // handle physics
             PhysicsComponent physicsComponent = GetComponent<PhysicsComponent>();
             Vector2 newVelocity = new Vector2(0, physicsComponent.Velocity.Y);
             if (shouldJump) {
@@ -88,13 +91,28 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             }
             physicsComponent.Velocity = newVelocity;
 
+            // update sprite
             SheetImageComponent sheetImageComponent = GetComponent<SheetImageComponent>();
-            if (!onGround) {
-                sheetImageComponent.CurrentRectangle = physicsComponent.Velocity.X == 0 ? sheetImageComponent.CurrentRectangle : (physicsComponent.Velocity.X < 0 ? 3 : 4);
+            if (shouldMove.left != shouldMove.right) {
+                animationTimer += gameTime.ElapsedGameTime.Milliseconds / 150f;
+                animationTimer %= 3;
+
+                if (shouldMove.left) {
+                    sheetImageComponent.CurrentRectangle = (int)Math.Floor(animationTimer) + 1;
+                } else {
+                    sheetImageComponent.CurrentRectangle = (int)Math.Floor(animationTimer) + 5;
+                }
+            } else {
+                if (sheetImageComponent.CurrentRectangle <= 3) {
+                    sheetImageComponent.CurrentRectangle = 3;
+                } else {
+                    sheetImageComponent.CurrentRectangle = 4;
+                }
             }
-            
+
             base.Update(gameTime);
 
+            // wrap position around if necessary
             if (AbsolutePosition.X > SceneManager.Instance.GraphicsDevice.Viewport.Width + AbsoluteSize.X) {
                 Position = new UDim2(new UDim(Position.X.Scale, -(int)AbsoluteSize.X), Position.Y);
             } else if (AbsolutePosition.X < -AbsoluteSize.X) {
