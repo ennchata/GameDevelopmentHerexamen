@@ -12,8 +12,11 @@ using System.Threading.Tasks;
 namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
     public class Player : GameObject {
         public int JumpPower { get; set; } = 750;
+        public int WalkSpeed { get; set; } = 450;
 
         private bool shouldJump = false;
+        private bool onGround = false;
+        private (bool left, bool right) shouldMove = (false, false);
 
         public Player(UDim2 initialPosition) {
             Position = initialPosition;
@@ -37,13 +40,30 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             AddComponent(new KeyInputComponent(Keys.Z, keyDownHandler: () => {
                 shouldJump = true;
             }));
+            AddComponent(new KeyInputComponent(Keys.Q, anyHandler: (isDown) => {
+                shouldMove.left = isDown;
+            }));
+            AddComponent(new KeyInputComponent(Keys.D, anyHandler: (isDown) => {
+                shouldMove.right = isDown;
+            }));
         }
 
         public override void Update(GameTime gameTime) {
             PhysicsComponent physicsComponent = GetComponent<PhysicsComponent>();
+            Vector2 newVelocity = new Vector2(0, physicsComponent.Velocity.Y);
             if (shouldJump) {
                 shouldJump = false;
-                physicsComponent.Velocity = new Vector2(physicsComponent.Velocity.X, -JumpPower);
+                newVelocity = new Vector2(0, -JumpPower);
+            }
+
+            if (shouldMove.left != shouldMove.right) {
+                newVelocity += new Vector2(shouldMove.left ? -WalkSpeed : WalkSpeed, 0);
+            }
+            physicsComponent.Velocity = newVelocity;
+
+            SheetImageComponent sheetImageComponent = GetComponent<SheetImageComponent>();
+            if (!onGround) {
+                sheetImageComponent.CurrentRectangle = physicsComponent.Velocity.X == 0 ? sheetImageComponent.CurrentRectangle : (physicsComponent.Velocity.X < 0 ? 3 : 4);
             }
             
             base.Update(gameTime);
