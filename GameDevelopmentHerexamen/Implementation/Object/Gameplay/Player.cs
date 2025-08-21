@@ -1,4 +1,5 @@
 ﻿using GameDevelopmentHerexamen.Framework.Object;
+using GameDevelopmentHerexamen.Framework.Object.Component;
 using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
@@ -6,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +42,9 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             });
             AddComponent(new PhysicsComponent());
             AddComponent(new KeyInputComponent(Keys.Z, keyDownHandler: () => {
-                shouldJump = true;
+                if (onGround) {
+                    shouldJump = true;
+                }
             }));
             AddComponent(new KeyInputComponent(Keys.Q, anyHandler: (isDown) => {
                 shouldMove.left = isDown;
@@ -48,6 +52,25 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             AddComponent(new KeyInputComponent(Keys.D, anyHandler: (isDown) => {
                 shouldMove.right = isDown;
             }));
+            AddComponent(new ColliderComponent(
+                collisionEnterHandler: (other) => {
+                    if (other is Ground) {
+                        PhysicsComponent physicsComponent = GetComponent<PhysicsComponent>();
+                        if (physicsComponent.Velocity.Y >= 0) {
+                            physicsComponent.GravityAffected = false;
+                            physicsComponent.Velocity = new Vector2(physicsComponent.Velocity.X, 0);
+                            onGround = true;
+                        }
+                    }
+                },
+                collisionLeaveHandler: (other) => {
+                    if (onGround && other is Ground) {
+                        onGround = false;
+                        PhysicsComponent physicsComponent = GetComponent<PhysicsComponent>();
+                        physicsComponent.GravityAffected = true;
+                    }
+                }
+            ));
         }
 
         public override void Update(GameTime gameTime) {
@@ -55,6 +78,8 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             Vector2 newVelocity = new Vector2(0, physicsComponent.Velocity.Y);
             if (shouldJump) {
                 shouldJump = false;
+                onGround = false;
+                physicsComponent.GravityAffected = true;
                 newVelocity = new Vector2(0, -JumpPower);
             }
 
