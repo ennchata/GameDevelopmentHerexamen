@@ -30,7 +30,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
             new TextButton(
                 new TextComponent() {
                     FontReference = "fonts/roboto14",
-                    Text = "Easy",
+                    Text = "Solo",
                     TextColor = Color.Black
                 },
                 () => {
@@ -45,22 +45,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
             new TextButton(
                 new TextComponent() {
                     FontReference = "fonts/roboto14",
-                    Text = "Normal",
-                    TextColor = Color.Black
-                },
-                () => {
-
-                },
-                Color.PaleGoldenrod
-            ) {
-                Size = new UDim2(0.25f, 0, 0.1f, 0),
-                Position = UDim2.CenterCenter,
-                Anchor = Vector2.One / 2f
-            },
-            new TextButton(
-                new TextComponent() {
-                    FontReference = "fonts/roboto14",
-                    Text = "Hard",
+                    Text = "Versus",
                     TextColor = Color.Black
                 },
                 () => {
@@ -69,7 +54,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
                 Color.Salmon
             ) {
                 Size = new UDim2(0.25f, 0, 0.1f, 0),
-                Position = UDim2.CenterCenter + new UDim2(0f, 0, 0.1f, 10),
+                Position = UDim2.CenterCenter,
                 Anchor = Vector2.One / 2f
             }
         ]) { }
