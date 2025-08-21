@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Component {
     public class PhysicsComponent : IComponent {
-        public static int TerminalYVelocity = 480;
-        public static int Gravity = 22;
+        public static int NormalTerminalYVelocity = 480;
+        public static int NormalGravity = 22;
+
+        public int TerminalYVelocity { get; set; } = NormalTerminalYVelocity;
+        public int Gravity { get; set; } = NormalGravity;
 
         public bool GravityAffected { get; set; } = true;
         public Vector2 Velocity { get; set; } = Vector2.Zero;
