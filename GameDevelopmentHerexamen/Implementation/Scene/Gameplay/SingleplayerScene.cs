@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
     public class SingleplayerScene : GameScene {
         public SingleplayerScene() : base([
-            new Player(new UDim2(0, 10, 0, 10))
+            new Player(new UDim2(0.5f, 0, 0.5f, 0))
         ]) { }
     }
 }

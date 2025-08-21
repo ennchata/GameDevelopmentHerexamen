@@ -1,4 +1,5 @@
 ﻿using GameDevelopmentHerexamen.Framework.Object;
+using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
 using Microsoft.Xna.Framework;
@@ -19,7 +20,8 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
         private (bool left, bool right) shouldMove = (false, false);
 
         public Player(UDim2 initialPosition) {
-            Position = initialPosition;
+            Vector2 rawInitialPosition = initialPosition.Resolve(new Vector2(SceneManager.Instance.GraphicsDevice.Viewport.Width, SceneManager.Instance.GraphicsDevice.Viewport.Height));
+            Position = new UDim2() + rawInitialPosition;
             Size = new UDim2(0, 16, 0, 32);
 
             AddComponent(new SheetImageComponent() {
@@ -67,6 +69,18 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             }
             
             base.Update(gameTime);
+
+            if (AbsolutePosition.X > SceneManager.Instance.GraphicsDevice.Viewport.Width + AbsoluteSize.X) {
+                Position = new UDim2(new UDim(Position.X.Scale, -(int)AbsoluteSize.X), Position.Y);
+            } else if (AbsolutePosition.X < -AbsoluteSize.X) {
+                Position = new UDim2(new UDim(Position.X.Scale, (int)(SceneManager.Instance.GraphicsDevice.Viewport.Width + AbsoluteSize.X)), Position.Y);
+            }
+
+            if (AbsolutePosition.Y > SceneManager.Instance.GraphicsDevice.Viewport.Height + AbsoluteSize.Y) {
+                Position = new UDim2(Position.X, new UDim(Position.Y.Scale, -(int)AbsoluteSize.Y));
+            } else if (AbsolutePosition.Y < -AbsoluteSize.Y) {
+                Position = new UDim2(Position.X, new UDim(Position.Y.Scale, (int)(SceneManager.Instance.GraphicsDevice.Viewport.Height + AbsoluteSize.Y)));
+            }
         }
     }
 }
