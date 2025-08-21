@@ -28,7 +28,9 @@ namespace GameDevelopmentHerexamen.Framework.Scene {
         }
 
         public void TransitionScene(ISceneTransitioner sceneTransitioner) {
-            this.sceneTransitioner = sceneTransitioner;
+            if (this.sceneTransitioner == null) {
+                this.sceneTransitioner = sceneTransitioner;
+            }
         }
 
         public void Update(GameTime gameTime) {
