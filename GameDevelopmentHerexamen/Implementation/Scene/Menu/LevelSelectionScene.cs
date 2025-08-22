@@ -49,7 +49,7 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Menu {
                     TextColor = Color.Black
                 },
                 () => {
-
+                    SceneManager.Instance.TransitionScene(new BlackFadeScreenTransitioner(new MultiplayerScene()));
                 },
                 Color.Salmon
             ) {

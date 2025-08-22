@@ -23,14 +23,26 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
         private (bool left, bool right) shouldMove = (false, false);
         private float animationTimer = 0;
 
-        public Player(UDim2 initialPosition) {
+        public Player(UDim2 initialPosition, bool alternateStyle = false) {
             Vector2 rawInitialPosition = initialPosition.Resolve(new Vector2(SceneManager.Instance.GraphicsDevice.Viewport.Width, SceneManager.Instance.GraphicsDevice.Viewport.Height));
             Position = new UDim2() + rawInitialPosition;
             Size = new UDim2(0, 16, 0, 32);
 
             AddComponent(new SheetImageComponent() {
                 AssetReference = "images/mario",
-                SourceRectangles = [
+                SourceRectangles = alternateStyle
+                ? [
+                    new Rectangle(102, 122, 16, 32),
+                    new Rectangle(127, 122, 16, 32),
+                    new Rectangle(152, 122, 16, 32),
+                    new Rectangle(180, 122, 16, 32),
+                    new Rectangle(209, 122, 16, 32),
+                    new Rectangle(237, 122, 16, 32),
+                    new Rectangle(262, 122, 16, 32),
+                    new Rectangle(287, 122, 16, 32),
+
+                ]
+                : [
                     new Rectangle(90, 52, 16, 32),  // 0 walking left
                     new Rectangle(120, 52, 16, 32), // 1
                     new Rectangle(150, 52, 16, 32), // 2
@@ -43,15 +55,15 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
                 CurrentRectangle = 0
             });
             AddComponent(new PhysicsComponent());
-            AddComponent(new KeyInputComponent(Keys.Z, keyDownHandler: () => {
+            AddComponent(new KeyInputComponent(alternateStyle ? Keys.Up : Keys.Z, keyDownHandler: () => {
                 if (onGround) {
                     shouldJump = true;
                 }
             }));
-            AddComponent(new KeyInputComponent(Keys.Q, anyHandler: (isDown) => {
+            AddComponent(new KeyInputComponent(alternateStyle ? Keys.Left : Keys.Q, anyHandler: (isDown) => {
                 shouldMove.left = isDown;
             }));
-            AddComponent(new KeyInputComponent(Keys.D, anyHandler: (isDown) => {
+            AddComponent(new KeyInputComponent(alternateStyle ? Keys.Right : Keys.D, anyHandler: (isDown) => {
                 shouldMove.right = isDown;
             }));
             AddComponent(new ColliderComponent(
