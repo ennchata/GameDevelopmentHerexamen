@@ -74,6 +74,12 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
                     }
                 }
             ));
+            AddComponent(new TextComponent() {
+                FontReference = "fonts/roboto14",
+                Text = "0",
+                TextAnchor = new Vector2(0.5f, 0f),
+                TextPosition = new UDim2(0.5f, 0, -1f, 0)
+            });
         }
 
         public override void Update(GameTime gameTime) {
@@ -112,6 +118,10 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             }
 
             base.Update(gameTime);
+
+            // update score text
+            TextComponent textComponent = GetComponent<TextComponent>();
+            textComponent.Text = Score.ToString("#,##0").Replace(",", " ");
 
             // wrap position around if necessary
             if (AbsolutePosition.X > SceneManager.Instance.GraphicsDevice.Viewport.Width + AbsoluteSize.X) {
