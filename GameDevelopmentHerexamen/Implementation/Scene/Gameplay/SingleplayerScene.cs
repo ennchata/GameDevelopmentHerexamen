@@ -3,6 +3,7 @@ using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
 using GameDevelopmentHerexamen.Implementation.Object.Gameplay;
+using GameDevelopmentHerexamen.Implementation.Object.Gameplay.Projectiles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
     public class SingleplayerScene : GameScene {
+        ProjectileFactory projectileFactory;
+
         public SingleplayerScene() : base([
             new Player(new UDim2(0.5f, 0, 0.5f, 0)) {
                 ZIndex = 100
@@ -19,7 +22,8 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
             new GameObject() {
                 Components = [
                     new ImageComponent() {
-                        AssetReference = "images/bg"
+                        AssetReference = "images/bg",
+                        Color = Color.Gray
                     }
                 ]
             },
@@ -55,6 +59,13 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
             }
         ]) {
             Player.Score = 0;
+            projectileFactory = new ProjectileFactory(this);
+        }
+
+        public override void Update(GameTime gameTime) {
+            base.Update(gameTime);
+
+            projectileFactory.Cleanup();
         }
     }
 }
