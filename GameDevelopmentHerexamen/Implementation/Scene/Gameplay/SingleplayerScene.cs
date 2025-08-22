@@ -13,12 +13,11 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
     public class SingleplayerScene : GameScene {
-        ProjectileFactory projectileFactory;
+        public Player[] Players { get; private set; } 
+
+        private ProjectileFactory projectileFactory;
 
         public SingleplayerScene() : base([
-            new Player(new UDim2(0.5f, 0, 0.5f, 0)) {
-                ZIndex = 100
-            },
             new GameObject() {
                 Components = [
                     new ImageComponent() {
@@ -57,9 +56,15 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
                 Anchor = new Vector2(1, 1),
                 Size = new UDim2(0.25f, 0, 0, 16)
             }
-        ]) {
+            ]) {
             Player.Score = 0;
+
+            Players = [new Player(new UDim2(0.5f, 0, 0.5f, 0)) {
+                 ZIndex = 100
+            }];
             projectileFactory = new ProjectileFactory(this);
+
+            AddChild(Players[0]);
         }
 
         public override void Update(GameTime gameTime) {

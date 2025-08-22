@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay.Projectiles {
     public enum ProjectilePreset {
-        FireballLR, FireballRL
+        FireballLR, FireballRL,
+        TrackFireballTopLeft, TrackFireballTopRight, TrackFireballBottomLeft, TrackFireballBottomRight
     }
 }
