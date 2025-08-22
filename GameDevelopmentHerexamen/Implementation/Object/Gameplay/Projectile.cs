@@ -20,7 +20,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             AddComponent(sheetImageComponent);
             AddComponent(new ColliderComponent(collisionEnterHandler: (other) => {
                 if (other is Player) {
-                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new GameOverScene(false, (other as Player).Score)));
+                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new GameOverScene(false, Player.Score)));
                 }
             }));
 
