@@ -53,6 +53,8 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
                 Anchor = new Vector2(1, 1),
                 Size = new UDim2(0.25f, 0, 0, 16)
             }
-        ]) { }
+        ]) {
+            Player.Score = 0;
+        }
     }
 }
