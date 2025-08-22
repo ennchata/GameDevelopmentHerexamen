@@ -16,6 +16,9 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
         public Player[] Players { get; private set; } 
 
         private ProjectileFactory projectileFactory;
+        private float projectileTimer = 0;
+        private float coinTimer = 0;
+        private Random random = new Random();
 
         public SingleplayerScene() : base([
             new GameObject() {
@@ -71,6 +74,23 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
             base.Update(gameTime);
 
             projectileFactory.Cleanup();
+
+            projectileTimer += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+            if (projectileTimer > 2) {
+                int choice = random.Next(Enum.GetValues<ProjectilePreset>().Length);
+                if (choice < Enum.GetValues<ProjectilePreset>().Length) {
+                    ProjectilePreset preset = (ProjectilePreset)choice;
+
+                    projectileFactory.AddFromPreset(preset, new UDim2(0, random.Next(SceneManager.Instance.GraphicsDevice.Viewport.Width), 0, random.Next(SceneManager.Instance.GraphicsDevice.Viewport.Height)));
+                }
+                projectileTimer %= 2;
+            }
+
+            coinTimer += gameTime.ElapsedGameTime.Milliseconds / 1000f;
+            if (coinTimer > 5) {
+                AddChild(new Coin(new UDim(0, random.Next(SceneManager.Instance.GraphicsDevice.Viewport.Width))));
+                coinTimer %= 5;
+            }
 
             if (Player.Score >= 10) {
                 SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new GameOverScene(true, Player.Score)));

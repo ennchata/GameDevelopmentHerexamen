@@ -18,7 +18,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay.Projectiles {
             },
             (owner, deltaTime, playerReference) => {
                 return new UDim2(
-                    0, (int)((playerReference.AbsolutePosition.X - owner.AbsolutePosition.X) * deltaTime),
+                    0, (int)(Math.Min(playerReference.AbsolutePosition.X - owner.AbsolutePosition.X, 180) * deltaTime),
                     0, (int)(180 * deltaTime)
                 );
             },
