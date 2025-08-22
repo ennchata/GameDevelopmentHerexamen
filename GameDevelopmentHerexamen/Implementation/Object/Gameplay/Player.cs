@@ -16,6 +16,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
     public class Player : GameObject {
         public int JumpPower { get; set; } = 825;
         public int WalkSpeed { get; set; } = 450;
+        public int Score { get; set; } = 0;
 
         private bool shouldJump = false;
         private bool onGround = false;

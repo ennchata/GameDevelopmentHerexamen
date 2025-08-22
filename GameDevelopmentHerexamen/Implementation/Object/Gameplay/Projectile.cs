@@ -1,7 +1,9 @@
 ﻿using GameDevelopmentHerexamen.Framework.Object;
 using GameDevelopmentHerexamen.Framework.Object.Component;
+using GameDevelopmentHerexamen.Framework.Scene;
 using GameDevelopmentHerexamen.Framework.Utility;
 using GameDevelopmentHerexamen.Implementation.Component;
+using GameDevelopmentHerexamen.Implementation.Scene.Gameplay;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay {
             AddComponent(sheetImageComponent);
             AddComponent(new ColliderComponent(collisionEnterHandler: (other) => {
                 if (other is Player) {
-                    // game over...
+                    SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new GameOverScene(false, (other as Player).Score)));
                 }
             }));
 
