@@ -58,6 +58,9 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
                 Position = new UDim2(1, 0, 0.5f, 0),
                 Anchor = new Vector2(1, 1),
                 Size = new UDim2(0.25f, 0, 0, 16)
+            },
+            new Fog() {
+                ZIndex = 101
             }
             ]) {
             Player.Score = 0;

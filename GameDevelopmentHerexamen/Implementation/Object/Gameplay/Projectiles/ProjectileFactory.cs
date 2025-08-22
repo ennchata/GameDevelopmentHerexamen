@@ -47,7 +47,7 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay.Projectiles {
         private Player PickPlayer() {
             List<GameObject> players = sceneReference.Children.Where(c => c is Player).ToList();
             if (players.Count == 1) return players.First() as Player;
-            return players[random.Next(players.Count + 1)] as Player;
+            return players[random.Next(players.Count)] as Player;
         }
 
         private void Add(Projectile projectile) {

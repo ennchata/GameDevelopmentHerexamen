@@ -28,7 +28,20 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
                         Color = Color.Purple
                     }
                 ]
-            }
+            },
+            new Fog() {
+                ZIndex = 105
+            },
+            new Ground() {
+                Position = new UDim2(0f, 0, 1f, 0),
+                Anchor = new Vector2(0, 1),
+                Size = new UDim2(0.25f, 0, 0, 16)
+            },
+            new Ground() {
+                Position = new UDim2(1f, 0, 1f, 0),
+                Anchor = new Vector2(1, 1),
+                Size = new UDim2(0.25f, 0, 0, 16)
+            },
 
             ]) {
             Player.Score = 0;
