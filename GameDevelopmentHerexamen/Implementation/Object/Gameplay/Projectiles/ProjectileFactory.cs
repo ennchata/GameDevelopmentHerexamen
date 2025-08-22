@@ -38,6 +38,9 @@ namespace GameDevelopmentHerexamen.Implementation.Object.Gameplay.Projectiles {
                 case ProjectilePreset.TrackFireballBottomRight:
                     Add(new TrackingFireball(false, false, 150, PickPlayer()));
                     break;
+                case ProjectilePreset.FakeCoin:
+                    Add(new FakeCoin(initialPosition.X, PickPlayer()));
+                    break;
             }
         }
 

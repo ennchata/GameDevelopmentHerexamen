@@ -71,6 +71,10 @@ namespace GameDevelopmentHerexamen.Implementation.Scene.Gameplay {
             base.Update(gameTime);
 
             projectileFactory.Cleanup();
+
+            if (Player.Score >= 10) {
+                SceneManager.Instance.TransitionScene(new InstantSceneTransitioner(new GameOverScene(true, Player.Score)));
+            }
         }
     }
 }
