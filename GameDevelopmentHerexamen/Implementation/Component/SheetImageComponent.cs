@@ -18,6 +18,7 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
         public int Order { get; set; } = 0;
 
         public (bool Horizontal, bool Vertical) Flip { get; set; } = (false, false);
+        public Color Color { get; set; } = Color.White;
 
         public void Draw(GameObject owner, SpriteBatch spriteBatch) {
             Texture2D texture = AssetManager.Instance.Load<Texture2D>(AssetReference);
@@ -26,7 +27,7 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
             if (Flip.Horizontal) effects |= SpriteEffects.FlipHorizontally;
             if (Flip.Vertical) effects |= SpriteEffects.FlipVertically;
 
-            spriteBatch.Draw(texture, owner.Bounds, SourceRectangles[CurrentRectangle], Color.White, 0f, Vector2.Zero, effects, 0f);
+            spriteBatch.Draw(texture, owner.Bounds, SourceRectangles[CurrentRectangle], Color, 0f, Vector2.Zero, effects, 0f);
         }
     }
 }

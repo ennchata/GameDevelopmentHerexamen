@@ -13,7 +13,7 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
     public class ImageComponent : IComponent {
         public string AssetReference { get; set; }
         public int Order { get; set; } = 0;
-
+        public Color Color { get; set; } = Color.White;
         public (bool Horizontal, bool Vertical) Flip { get; set; } = (false, false);
 
         public void Draw(GameObject owner, SpriteBatch spriteBatch) {
@@ -23,7 +23,7 @@ namespace GameDevelopmentHerexamen.Implementation.Component {
             if (Flip.Horizontal) effects |= SpriteEffects.FlipHorizontally;
             if (Flip.Vertical) effects |= SpriteEffects.FlipVertically;
 
-            spriteBatch.Draw(texture, owner.Bounds, null, Color.White, 0f, Vector2.Zero, effects, 0f);
+            spriteBatch.Draw(texture, owner.Bounds, null, Color, 0f, Vector2.Zero, effects, 0f);
         }
     }
 }
